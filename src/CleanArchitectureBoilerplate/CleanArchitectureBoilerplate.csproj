@@ -4,6 +4,12 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<PackageId>ampr64.CleanArchitectureBoilerplate</PackageId>
+		<Version>0.1</Version>
+		<Authors>Álvaro Prieto (@ampr64)</Authors>
+		<Description>Boilerplate code shared across my clean architecture solutions.</Description>
+		<PackageProjectUrl>https://github.com/ampr64/clean-architecture-boilerplate</PackageProjectUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 	</PropertyGroup>
 
 </Project>
