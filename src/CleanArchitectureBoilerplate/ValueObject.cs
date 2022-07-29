@@ -1,5 +1,8 @@
 ﻿namespace CleanArchitectureBoilerplate
 {
+    /// <summary>
+    /// The base class to represent an immutable domain object that has no identity.
+    /// </summary>
     public abstract class ValueObject : IEquatable<ValueObject>
     {
         public override bool Equals(object? obj)
@@ -40,8 +43,16 @@
             return !(left == right);
         }
 
+        /// <summary>
+        /// Creates a new instance 
+        /// </summary>
+        /// <returns>A new reference </returns>
         public ValueObject Clone() => (ValueObject)MemberwiseClone();
 
+        /// <summary>
+        /// Gets the attributes that will be used to determine its equality.
+        /// </summary>
+        /// <returns>The collection of values used to determine equality.</returns>
         protected abstract IEnumerable<object?> GetEqualityComponents();
     }
 }
