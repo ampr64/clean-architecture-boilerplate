@@ -1,6 +1,6 @@
 ﻿namespace CleanArchitectureBoilerplate.UnitTests
 {
-    public class ValueObjectTests
+    public class ValueObjectEquals
     {
         [Theory, AutoMoqData]
         public void Equals_ShouldReturnTrue_WhenBothHaveSameTypeAndValues(string value1, int value2)
@@ -67,71 +67,6 @@
             var actual = valueObjectA != valueObjectB;
 
             actual.Should().NotBe(equals);
-        }
-
-        [Theory, AutoMoqData]
-        public void GetHashCode_ShouldReturnSameValue_GivenSameEqualityComponents(string value1, int value2)
-        {
-            var valueObjectA = new DummyValueObject(value1, value2);
-            var valueObjectB = new DummyValueObject(value1, value2);
-
-            var hashCodeA = valueObjectA.GetHashCode();
-            var hashCodeB = valueObjectB.GetHashCode();
-
-            hashCodeA.Should().Be(hashCodeB);
-        }
-
-        [Theory]
-        [AutoMoqInlineData("test", 10)]
-        [AutoMoqInlineData("abc", 123)]
-        [AutoMoqInlineData("string", 500)]
-        public void GetHashCode_ShouldDifferentValue_GivenDifferentEqualityComponents(string value1, int value2)
-        {
-            var valueObjectA = new DummyValueObject(value1, value2);
-            var valueObjectB = new DummyValueObject2(value1, value2);
-
-            var hashCodeA = valueObjectA.GetHashCode();
-            var hashCodeB = valueObjectB.GetHashCode();
-
-            hashCodeA.Should().NotBe(hashCodeB);
-        }
-
-        [Theory, AutoMoqData]
-        public void Clone_ShouldReturnEquivalentValueObject(string value1, int value2)
-        {
-            var valueObject = new DummyValueObject(value1, value2);
-            var clone = valueObject.Clone();
-
-            clone.Should().Be(valueObject);
-        }
-
-        private class DummyValueObject : ValueObject
-        {
-            public string Value1 { get; }
-
-            public int Value2 { get; }
-
-            public DummyValueObject(string value1, int value2) => (Value1, Value2) = (value1, value2);
-
-            protected override IEnumerable<object?> GetEqualityComponents()
-            {
-                yield return Value1;
-                yield return Value2;
-            }
-        }
-
-        private class DummyValueObject2 : ValueObject
-        {
-            public string Value1 { get; }
-
-            public int Value2 { get; }
-
-            public DummyValueObject2(string value1, int value2) => (Value1, Value2) = (value1, value2);
-
-            protected override IEnumerable<object?> GetEqualityComponents()
-            {
-                yield return Value1;
-            }
         }
     }
 }
